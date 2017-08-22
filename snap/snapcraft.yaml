@@ -6,8 +6,20 @@ description: prints the value of env variable HOME
 grade: devel # must be 'stable' to release into candidate/stable channels
 confinement: devmode # use 'strict' once you have the right plugs and slots
 
+apps:
+  snapface-cpp:
+      command: bin/snapface-cpp
+      #daemon: simple
+  snapface-go:
+      command: bin/snapface-go
+
 parts:
-  snapface:
+  snapface-cpp:
     plugin: cmake
-    source: .
-    stage: [bin/snappymcsnapface]
+    source: cpp
+    stage: [bin/snapface-cpp]
+  snapface-go:
+    plugin: go
+    source: golang
+    organize:
+      bin/golang: bin/snapface-go
